@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADX Query Interface</title>
+</head>
+<body>
+    <h1>ADX Query Interface</h1>
+    <form action="/connect" method="POST">
+        <label for="clusterName">Cluster URL:</label>
+        <input type="text" id="clusterName" name="clusterName" required>
+        <br><br>
+        <label for="tenantID">Tenant ID (AAD):</label>
+        <input type="text" id="tenantID" name="tenantID" required>
+        <br><br>
+        <input type="submit" value="Connect">
+    </form>
+</body>
+</html>

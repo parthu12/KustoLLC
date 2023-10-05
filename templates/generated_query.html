@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Query</title>
+</head>
+<body>
+    <h1>Generated Query</h1>
+    <h3>Generated Kusto Query:</h3>
+    <pre>{{ query }}</pre>
+    <form action="/execute_query" method="POST">
+        <input type="hidden" name="query" value="{{ query }}">
+        <input type="submit" value="Execute Query">
+    </form>
+</body>
+</html>

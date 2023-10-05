@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Azure Kusto Query Interface</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Azure Kusto Query Interface</h1>
+
+        <form action="/" method="POST" class="mb-4">
+            <div class="form-group">
+                <label for="clusterName">Cluster URL:</label>
+                <input type="text" id="clusterName" name="clusterName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="tenantID">Tenant ID (AAD):</label>
+                <input type="text" id="tenantID" name="tenantID" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+
+        {% if databases %}
+            <form action="/action" method="POST" class="mb-4">
+                <div class="form-group">
+                    <label for="database">Choose a database:</label>
+                    <select id="database" name="database" class="form-control" required>
+                        <option value="">{{selected_database}}</option>
+                        {% for db in databases %}
+                            <option value="{{ db }}">{{ db }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" name="selectDatabase">Next</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='/action'">Reset</button>
+            </form>
+        {% endif %}
+
+        {% if tables %}
+            <form action="/action" method="POST" class="mb-4">
+                <div class="form-group">
+                    <label for="table">Choose a table:</label>
+                    <select id="table" name="table" class="form-control" required>
+                        <option value="">{{selected_table}}</option>
+                        {% for table in tables %}
+                            <option value="{{ table }}">{{ table }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" name="selectTable">Next</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='/action'">Reset</button>
+            </form>
+        {% endif %}
+
+        {% if selected_database and selected_table %}
+            <form action="/action" method="POST" class="mb-4">
+                <div class="form-group">
+                    <label for="prompt">Enter a query prompt:</label>
+                    <input type="text" id="prompt" name="prompt" class="form-control" required value = {{prompt}}>
+                </div>
+                <button type="submit" class="btn btn-primary" name="generateQuery">Generate Query</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='/action'">Reset</button>
+            </form>
+        {% endif %}
+
+        {% if query %}
+            <h3>Generated Kusto Query:</h3>
+            <pre>{{ query }}</pre>
+            <form action="/action" method="POST" class="mb-4">
+                <input type="hidden" name="query" value="{{ query }}">
+                <button type="submit" class="btn btn-primary" name="executeQuery">Execute Query</button>
+            </form>
+        {% endif %}
+
+        {% if result %}
+            <h3>Query Results:</h3>
+            {{ result | safe }}
+        {% endif %}
+
+        {% if error %}
+            <h3>Error in query:</h3>
+            <pre>{{ error }}</pre>
+        {% endif %}
+
+
+
+
+    </div>
+</body>
+</html>

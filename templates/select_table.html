@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Table</title>
+</head>
+<body>
+    <h1>Select Table</h1>
+    <form action="/select_table" method="POST">
+        <label for="table">Choose a table:</label>
+        <select id="table" name="table" required>
+            {% for table in tables %}
+                <option value="{{ table }}">{{ table }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Next">
+    </form>
+</body>
+</html>

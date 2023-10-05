@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Database</title>
+</head>
+<body>
+    <h1>Select Database</h1>
+    <form action="/select_database" method="POST">
+        <label for="database">Choose a database:</label>
+        <select id="database" name="database" required>
+            {% for db in databases %}
+                <option value="{{ db }}">{{ db }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Next">
+    </form>
+</body>
+</html>
