@@ -19,7 +19,7 @@ app.listen(8000, ()=>{
 app.post('/completions',async (req, res) => {
     try{
         console.log("completions1")
-        const completions = await openai.ChatCompletion.create({
+        const completions = await createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [{ role: "system", content: "You are a helpful assistant that generates SQL requests." },{
             role: "user", 
